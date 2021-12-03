@@ -17,4 +17,8 @@ class Song extends Model
     public function genre(){
         return $this->belongsTo(Genre::class);
     }
+
+    public function formattedDuration(){
+        return sprintf('%02d:%02d:%02d', $this->duration / 3600, ($this->duration / 60) % 60, $this->duration / 60);
+    }
 }

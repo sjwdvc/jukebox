@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateSongrequest;
+use App\Models\Genre;
 use App\Models\Song;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $allSongs = Song::all();
+        return view('songs.index', compact('allSongs'));
     }
 
     /**
@@ -24,7 +27,8 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+        return view('songs.create', compact('genres'));
     }
 
     /**
@@ -33,9 +37,10 @@ class SongController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSongrequest $request)
     {
-        //
+        $request->persist();
+        return redirect(route('viewSongs'));
     }
 
     /**
@@ -46,7 +51,7 @@ class SongController extends Controller
      */
     public function show(Song $song)
     {
-        //
+        return view('songs.show', compact('song'));
     }
 
     /**
